@@ -33,4 +33,3 @@ Antes de começar, você precisará ter instalado em sua máquina:
 
 ##    Prints
 ![Tela do Projeto](./prints/image.png)
-**Tela do tarefa funcionando
