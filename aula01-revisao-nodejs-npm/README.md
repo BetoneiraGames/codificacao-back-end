@@ -29,4 +29,8 @@ Antes de começar, você precisará ter instalado em sua máquina:
 
 1. Clone este repositório ou baixe o arquivo `diagnostico.js`:
    ```bash
-   git clone [https://github.com/seu-usuario/diagnostico-servidor.git](https://github.com/seu-usuario/diagnostico-servidor.git)
+   git clone [https://github.com/BetoneiraGames/codificacao-back-end.git](https://github.com/BetoneiraGames/codificacao-back-end/aula01-revisao-nodejs-npm.git)
+
+##    Prints
+![Tela do Projeto](./prints/image.png)
+**Tela do tarefa funcionando
