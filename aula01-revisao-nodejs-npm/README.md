@@ -18,7 +18,7 @@ Uma ferramenta simples e leve desenvolvida em **Node.js** que utiliza o módulo 
 
 ---
 
-## 📋 Pré-requisitos
+## 📋 Pré-requisito
 
 Antes de começar, você precisará ter instalado em sua máquina:
 - [Node.js](https://nodejs.org/) (versão 12 ou superior recomendada).
