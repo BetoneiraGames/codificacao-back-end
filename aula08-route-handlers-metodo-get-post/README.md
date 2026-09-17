@@ -117,4 +117,4 @@ Nest possui [licença MIT](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 ## Alterações do aluno
 
-  Nova Função de controller para chamar convidados
+  Nova Função de controller para chamar convidados .
