@@ -1,0 +1,13 @@
+$kind: http-request
+url: localhost:3000/convidados
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nome\": \"Matheus\",\r
+
+    \    \"idade\": 20\r
+
+    }"
+order: 222938321479784
