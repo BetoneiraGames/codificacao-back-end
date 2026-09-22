@@ -191,7 +191,7 @@ Resposta obtida no teste:
 
 ### Evidência no Insomnia
 
-![Teste POST — Cadastrar convidado](metodo-post.png)
+![Teste POST — Cadastrar convidado](./telas/metodo-post.png)
 
 ---
 
@@ -229,7 +229,7 @@ Resposta obtida no teste:
 
 ### Evidência no Insomnia
 
-![Teste PATCH — Atualizar idade](metodo-patch.png)
+![Teste PATCH — Atualizar idade](./telas/metodo-patch.png)
 
 ---
 
