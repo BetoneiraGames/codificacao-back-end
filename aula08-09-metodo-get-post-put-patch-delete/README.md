@@ -263,7 +263,7 @@ Esse teste demonstra o tratamento de erro implementado no service quando o ID in
 
 ### Evidência no Insomnia
 
-![Teste DELETE — ID não encontrado](metodo-delete.png)
+![Teste DELETE — ID não encontrado](./telas/metodo-delete.png)
 
 ---
 
@@ -326,10 +326,10 @@ para realizar as requisições.
 
 As imagens dos testes utilizadas neste README são:
 
-- `metodo-get.png`
-- `metodo-post.png`
-- `metodo-patch.png`
-- `metodo-delete.png`
+- `./telas/metodo-get.png`
+- `./telas/metodo-post.png`
+- `./telas/metodo-patch.png`
+- `./telas/metodo-delete.png`
 
 Para que as imagens apareçam no GitHub, mantenha esses arquivos na mesma pasta do `README.md` ou ajuste os caminhos das imagens no README.
 
