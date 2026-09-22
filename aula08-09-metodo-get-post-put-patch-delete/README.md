@@ -152,7 +152,7 @@ Exemplo:
 
 ### Evidência no Insomnia
 
-![Teste GET — Listar convidados](metodo-get.png)
+![Teste GET — Listar convidados](./telas/metodo-get.png)
 
 ---
 
