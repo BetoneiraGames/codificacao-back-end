@@ -4,18 +4,33 @@ import type { Request, Response, NextFunction } from 'express';
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    console.log(`[LOG] Método: ${req.method} | Rota: ${req.path}`);
+    const rotaAdmin = req.originalUrl || req.url;
+    console.log(`[LOG] Método: ${req.method} | Rota: ${rotaAdmin}`);
+    if (rotaAdmin.startsWith('/admin')){
 
-    if(req.path.startsWith('')){
-      const role = req.headers['x-user-role'];
-      if(role !== 'supervisor'){
+      const role = req.headers['api-key-admin'];
+      if(role !== 'administrator'){
         return res.status(403).json({
           statusCode: 403,
-          message:'Acesso Negado: Privilégio de Surpevisor Necessário.',
+          message:'Acesso Negado: Privilégio de administrador Necessário.',
+          log: new Date(),
+        });
+      }
+    }
+    const rotaSecreta = req.originalUrl || req.url;
+    console.log(`[LOG] Método: ${req.method} | Rota: ${rotaSecreta}`);
+    if (rotaSecreta.startsWith('/secret')){
+      const role = req.headers['api-key-secret'];
+      if(role !== 'secret'){
+        return res.status(403).json({
+          statusCode: 403,
+          mensagem: 'Acesso negado: Privilegio de secreto necessario.',
           log: new Date(),
         });
       }
     }
     next();
       }
+
+
 }
