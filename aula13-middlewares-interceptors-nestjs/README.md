@@ -1,163 +1,151 @@
-# Projeto NestJS — Rotas Públicas e Middleware
+# API NestJS — Middleware e Controle de Acesso
 
-Projeto desenvolvido com **Node.js, NestJS e TypeScript**, com foco no estudo de rotas HTTP, organização de módulos e utilização de **middleware** para interceptar as requisições da aplicação.
+Projeto desenvolvido utilizando **Node.js**, **NestJS** e **NPM**, com o objetivo de praticar a criação de uma API, organização de módulos, controllers e utilização de middleware para registro de requisições e controle de acesso.
 
-Os endpoints foram preparados para testes utilizando o **Insomnia**.
+## 🚀 Tecnologias utilizadas
 
-## 🚀 Sobre o projeto
+- Node.js
+- NestJS
+- NPM
+- TypeScript
+- Express
 
-A aplicação possui duas rotas principais:
+## 📋 Sobre o projeto
 
-- Uma rota pública na raiz (`GET /`);
-- Uma rota administrativa (`GET /admin`).
+A aplicação possui três rotas principais:
 
-Além das rotas, o `AppModule` configura o `LoggerMiddleware` para ser aplicado a **todas as rotas** da aplicação.
+- `/` — rota pública
+- `/admin` — rota protegida para administradores
+- `/secret` — rota protegida para acesso secreto
 
-## 🛠️ Tecnologias utilizadas
+O projeto utiliza um `LoggerMiddleware`, aplicado globalmente às rotas da aplicação. Esse middleware registra o método HTTP e a rota acessada.
 
-- **Node.js**
-- **NestJS**
-- **TypeScript**
-- **Express**
-- **NestJS Observe**
-- **Insomnia** para testes das requisições
+Além do registro das requisições, o middleware verifica headers específicos para controlar o acesso às rotas protegidas.
 
-## 📁 Estrutura do projeto
+## 🔐 Controle de acesso
+
+### Rota pública
+
+A rota:
+
+```http
+GET /
+```
+
+não exige nenhuma chave de acesso e retorna uma mensagem informando que a rota pública foi acessada.
+
+### Rota administrativa
+
+A rota:
+
+```http
+GET /admin
+```
+
+exige o seguinte header:
+
+```http
+api-key-admin: administrator
+```
+
+Caso o valor seja diferente de `administrator`, a API retorna:
+
+```http
+403 Forbidden
+```
+
+com uma mensagem informando que é necessário privilégio de administrador.
+
+### Rota secreta
+
+A rota:
+
+```http
+GET /secret
+```
+
+exige o header:
+
+```http
+api-key-secret: secret
+```
+
+Caso o valor esteja incorreto, a API retorna:
+
+```http
+403 Forbidden
+```
+
+indicando que o acesso foi negado.
+
+## 🗂️ Estrutura principal
 
 ```text
 src/
 ├── app.controller.ts
 ├── app.module.ts
+├── app.service.ts
 └── logger/
     └── logger.middleware.ts
 ```
 
-> O `app.module.ts` referencia o arquivo `logger/logger.middleware.ts`, que é responsável pelo middleware utilizado na aplicação.
+### AppController
 
-## 🌐 Rotas da aplicação
-
-### Rota pública
-
-**Método:** `GET`
-
-**Endpoint:**
+Responsável pelas rotas da aplicação:
 
 ```text
-/
+GET /
+GET /admin
+GET /secret
 ```
 
-A rota retorna uma mensagem indicando que a rota pública foi acessada com sucesso, juntamente com a data e hora da requisição.
+Essas rotas estão definidas no controller principal.
 
-Exemplo de resposta:
+### LoggerMiddleware
 
-```json
-{
-  "mensage": "Rota Publica acessada com sucesso",
-  "data": "2026-09-29T19:00:00.000Z"
-}
-```
+Responsável por:
 
-O campo `data` é gerado no momento em que a requisição é realizada.
+- Registrar método HTTP e rota acessada;
+- Verificar o acesso à rota `/admin`;
+- Verificar o acesso à rota `/secret`;
+- Retornar `403` quando as credenciais não correspondem;
+- Permitir a continuação da requisição quando o acesso é autorizado.
 
-### Rota administrativa
+### AppModule
 
-**Método:** `GET`
+O middleware é aplicado a todas as rotas através de:
 
-**Endpoint:**
-
-```text
-/admin
-```
-
-A rota retorna uma mensagem de boas-vindas ao painel administrativo e a data e hora da requisição.
-
-Exemplo:
-
-```json
-{
-  "mensage": "Bem-Vindo ao painel adminstrativo!",
-  "data": "2026-09-29T19:00:00.000Z"
-}
-```
-
-## 🔄 Middleware
-
-O projeto utiliza um `LoggerMiddleware`, registrado no `AppModule`.
-
-A configuração aplica o middleware utilizando:
-
-```ts
+```typescript
 consumer.apply(LoggerMiddleware).forRoutes('*');
 ```
 
-Isso significa que o middleware é configurado para as rotas da aplicação.
 
-O comportamento interno do middleware deve ser consultado no arquivo:
 
-```text
-src/logger/logger.middleware.ts
-```
+### AppService
 
-## 🧪 Testes com Insomnia
-
-Os endpoints podem ser testados diretamente pelo **Insomnia**.
-
-### Teste 1 — Rota pública
-
-Crie uma requisição:
+O serviço contém um método que retorna:
 
 ```text
-GET http://localhost:3000/
+Status do Servidor: Ativo
 ```
 
-Resultado esperado:
 
-```text
-Status: 200 OK
-```
-
-Resposta esperada:
-
-```json
-{
-  "mensage": "Rota Publica acessada com sucesso",
-  "data": "data_da_requisicao"
-}
-```
-
-### Teste 2 — Rota administrativa
-
-Crie uma requisição:
-
-```text
-GET http://localhost:3000/admin
-```
-
-Resultado esperado:
-
-```text
-Status: 200 OK
-```
-
-Resposta esperada:
-
-```json
-{
-  "mensage": "Bem-Vindo ao painel adminstrativo!",
-  "data": "data_da_requisicao"
-}
-```
-
-## 📊 Resumo dos endpoints
-
-| Método | Endpoint | Descrição | Resultado |
-|---|---|---|---|
-| GET | `/` | Acessa a rota pública | `200 OK` |
-| GET | `/admin` | Acessa a rota administrativa | `200 OK` |
 
 ## ⚙️ Instalação
 
-Instale as dependências do projeto:
+Clone o repositório:
+
+```bash
+git clone URL_DO_SEU_REPOSITORIO
+```
+
+Entre na pasta do projeto:
+
+```bash
+cd nome-do-projeto
+```
+
+Instale as dependências:
 
 ```bash
 npm install
@@ -165,62 +153,92 @@ npm install
 
 ## ▶️ Executando o projeto
 
-### Desenvolvimento
-
-```bash
-npm run start
-```
-
-### Desenvolvimento com atualização automática
+Para iniciar a aplicação em modo de desenvolvimento:
 
 ```bash
 npm run start:dev
 ```
 
-### Produção
+Depois, acesse a API através da porta configurada no projeto.
 
-```bash
-npm run start:prod
-```
-
-Após iniciar a aplicação, utilize o Insomnia para acessar:
+Exemplo:
 
 ```text
-http://localhost:3000/
+http://localhost:3000
+```
+
+## 🧪 Testando a API
+
+### Rota pública
+
+```http
+GET http://localhost:3000/
+```
+
+### Rota administrativa
+
+Utilize:
+
+```http
+GET http://localhost:3000/admin
+```
+
+Com o header:
+
+```http
+api-key-admin: administrator
+```
+
+### Rota secreta
+
+Utilize:
+
+```http
+GET http://localhost:3000/secret
+```
+
+Com o header:
+
+```http
+api-key-secret: secret
+```
+
+## ❌ Teste de acesso negado
+
+Para testar o bloqueio, utilize um valor incorreto.
+
+Exemplo:
+
+```http
+api-key-admin: usuario
 ```
 
 ou:
 
-```text
-http://localhost:3000/admin
+```http
+api-key-secret: usuario
 ```
 
-## 📊 Observabilidade
+A aplicação deverá retornar:
 
-O projeto mantém a configuração do **NestJS Observe** por meio de `createObserveModule()` no `AppModule`.
+```text
+403 Forbidden
+```
 
-A configuração de observabilidade pode ser utilizada para instrumentação da aplicação conforme o ambiente do projeto.
+## 📌 Objetivo
 
-## 📌 Conceitos praticados
+Este projeto foi desenvolvido para praticar conceitos fundamentais do NestJS, incluindo:
 
-- Criação de aplicações com NestJS;
-- Criação de controllers;
-- Criação de rotas `GET`;
-- Retorno de objetos JSON;
-- Geração de data/hora com `new Date()`;
-- Criação e aplicação de middleware;
-- Aplicação de middleware em todas as rotas;
-- Organização de arquivos no projeto;
-- Testes de endpoints utilizando o Insomnia;
-- Configuração do NestJS Observe.
+- Controllers;
+- Services;
+- Modules;
+- Middleware;
+- Rotas HTTP;
+- Headers;
+- Controle de acesso;
+- Status HTTP;
+- Organização de uma API REST.
 
-## 🧪 Testes realizados no Insomnia
+## 👨‍💻 Autor
 
-| Cenário | Método | URL | Resultado esperado |
-|---|---|---|---|
-| Rota pública | GET | `http://localhost:3000/` | `200 OK` |
-| Painel administrativo | GET | `http://localhost:3000/admin` | `200 OK` |
-
-## 📄 Licença
-
-Projeto desenvolvido para fins de estudo e prática com **Node.js, NestJS, TypeScript, rotas HTTP e middleware**.
+Projeto desenvolvido para estudos e prática de desenvolvimento backend com **Node.js e NestJS**.
