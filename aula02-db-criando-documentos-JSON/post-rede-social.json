@@ -1,0 +1,15 @@
+{
+    "texto": "Passeando com meu cachorro",
+    "autor": "@FranciscaMendes53",
+    "data": "2025-07-12",
+    "curtidas": [ 
+        {"autor": "@JoséSantiago80"},
+        {"autor": "@Francisca Mendes77"}
+],
+
+    "comentarios": [
+        {"autor": "@RaimundoBrito0", "texto": "Esse cachorro cagou tudo"},
+        {"autor": "@ArmandoPinto99", "texto": "Cachorro muito feio"}
+    ]
+    
+}

@@ -1,0 +1,14 @@
+{
+    "nome": "Notebook Asus Tuf Gaming A15 fn",
+    "categoria": "Informatica",
+    "preco": 4999.99,
+    "quantidade": 15,
+    "especificacoes":{
+        "RAM": "16GB",
+        "processor": "AMD Ryzen 7 7465hs",
+        "armazenamento":  "512GB SSD"
+    },
+    "tags": [
+        "Notebook", "Gaming", "Jogos"
+   ]
+}

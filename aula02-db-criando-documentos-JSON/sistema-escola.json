@@ -1,0 +1,10 @@
+{
+    "usuario": [
+    {"nome": "João", "matricula": 1226, "dataNascimento": "2009-08-03"},
+    {"nome": "Matheus", "matricula": 1228, "dataNascimento": "2009-07-09"}
+    ],
+    "anoNotas": [
+    {"matricula": 1226, "materia": "Matematica", "notaValor": 6.7, "professor": "Márcio", "numeroFaltas": 6},
+    {"matricula": 1228, "materia": "Português", "notaValor": 6.7, "professor": "Maria", "numeroFaltas": 7}
+    ]
+}
