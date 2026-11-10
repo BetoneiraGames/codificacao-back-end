@@ -16,14 +16,15 @@ export class Aluno {
     idade: number;
 
     @Prop({
-        required: true
+        required: true,
+        unique: true 
     })
-    matricula: string
+    matricula: string;
 
     @Prop([
         String
     ])
-    curso: string[];
+    cursos: string[];
 
     
 }
