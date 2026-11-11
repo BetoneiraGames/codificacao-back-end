@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+
 import { CreateAlunoDto } from "./dto/create-aluno.dto.js";
 import { UpdateAlunoDto } from "./dto/update-aluno.js";
 import { Aluno, AlunoDocument } from "./schemas/aluno.schema.js";
@@ -15,13 +16,28 @@ export class AlunosService{
         return createdAluno.save();
     }
 
-    async findAllPage(page: number, limit: number){
+    async findAllPage(page: number, limit: number, nome?: string, curso?: string){
 
         const skip = (page - 1) * limit;
+        const filtro: any = {};
+
+        if(nome){
+            filtro.nome ={
+                $regex: new RegExp(nome, 'i'),
+            };
+        }
+
+        if(curso){
+            filtro.cursos = curso;
+        }
+
+
         const [data, total] =  await Promise.all([
-            this.alunoModel.find().skip(skip).limit(limit).exec(),
-            this.alunoModel.countDocuments().exec()
+            this.alunoModel.find(filtro).skip(skip).limit(limit).exec(),
+            this.alunoModel.countDocuments(filtro).exec()
         ]);
+
+
 
         return {
             data,
