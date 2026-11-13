@@ -25,6 +25,10 @@ export class Aluno {
         String
     ])
     cursos: string[];
+    @Prop({
+        default: true,
+    })
+    ativo: boolean
 
     
 }
